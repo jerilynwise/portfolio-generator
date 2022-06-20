@@ -1,6 +1,8 @@
-<<<<<<< HEAD
 const inquirer = require('inquirer');
 console.log(inquirer);
+
+const fs = require('fs');
+const generatePage = require('./src/page-template');
 
 const promptUser = () => {
     return inquirer.prompt([
@@ -135,37 +137,16 @@ const promptProject = portfolioData => {
   promptUser()
     .then(promptProject)
     .then(portfolioData =>{
-      console.log(portfolioData);
+      const pageHTML = generatePage(name, github);
+      fs.writeFile('index.html', pageHTML, err =>{
+          if (err) throw err;
+      comsole.log("portfolio complete! Check out index.html to see output!")
+    }); 
+
     });
   
 
-// const fs = require('fs');
-// const generatePage = require('./src/page-template');
 
 
-// const pageHTML = generatePage(name, github);
 
 
-// fs.writeFile('index.html', pageHTML, err =>{
-//     if (err) throw err;
-    
-//     comsole.log("portfolio complete! Check out index.html to see output!")
-// }); 
-=======
-const profileDataArgs = process.argv.slice(2, process.argv.length);
-console.log(profileDataArgs);
-
-const printProfileData = profileDataArr => {
-    // This...
-    for (let i = 0; i < profileDataArr.length; i += 1) {
-      console.log(profileDataArr[i]);
-    }
-  
-    console.log('================');
-  
-    // Is the same as this...
-    profileDataArr.forEach(profileItem => console.log(profileItem))
-  };
-
-printProfileData(profileDataArgs);
->>>>>>> 6291a3fc1f5f0937d6e5966f5731e342118e2997
